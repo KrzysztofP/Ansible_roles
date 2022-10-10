@@ -1,0 +1,17 @@
+- name: Install python package
+  pip:
+    name: 
+    - docker
+    - docker-compose
+
+- name: Git checkout
+  git:
+    dest: "{{ deployment_path }}"
+    repo: "{{ git_repository }}"
+    version: "{{ git_branch }}"
+
+- name: Run `docker-compose up`
+  docker_compose:
+    project_src: "{{ deployment_path }}"
+    build: yes
+    debug: yes
